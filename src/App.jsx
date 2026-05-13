@@ -2,35 +2,56 @@ import React, { useState } from 'react'
 import ProductList from './components/ProductList'
 import DarkModeToggle from './components/DarkModeToggle'
 import Cart from './components/Cart'
+import './App.css'
 
 const App = () => {
-  // TODO: Implement state for dark mode toggle
+  const [isDarkMode, setIsDarkMode] = useState(false)
 
-  // TODO: Implement state for cart management
+  const [cartItems, setCartItems] = useState([])
 
-  // TODO: Implement state for category filtering
+  const addToCart = (product) => {
+    setCartItems((currentItems) => [...currentItems, product])
+  }
+
+  const [selectedCategory, setSelectedCategory] = useState('all')
 
   return (
-    <div>
-      <h1>🛒 Shopping App</h1>
-      <p>
-        Welcome! Your task is to implement filtering, cart management, and dark
-        mode.
-      </p>
+    <div className={`app ${isDarkMode ? 'dark-mode' : 'light-mode'}`}>
+      <header className="app-header">
+        <div>
+          <h1>Shopping App</h1>
+          <p>Browse products by category and build your cart.</p>
+        </div>
 
-      {/* TODO: Render DarkModeToggle and implement dark mode functionality */}
+        <DarkModeToggle
+          isDarkMode={isDarkMode}
+          onToggle={() => setIsDarkMode((currentMode) => !currentMode)}
+        />
+      </header>
 
-      {/* TODO: Implement category filter dropdown */}
-      <label>Filter by Category: </label>
-      <select>
-        <option value="all">All</option>
-        <option value="Fruits">Fruits</option>
-        <option value="Dairy">Dairy</option>
-      </select>
+      <div className="filter-bar">
+        <label htmlFor="category-filter">Filter by Category</label>
+        <select
+          id="category-filter"
+          value={selectedCategory}
+          onChange={(event) => setSelectedCategory(event.target.value)}
+        >
+          <option value="all">All</option>
+          <option value="Fruits">Fruits</option>
+          <option value="Dairy">Dairy</option>
+          <option value="Electronics">Electronics</option>
+          <option value="Fashion">Fashion</option>
+        </select>
+      </div>
 
-      <ProductList />
+      <main className="shop-layout">
+        <ProductList
+          selectedCategory={selectedCategory}
+          addToCart={addToCart}
+        />
 
-      {/* TODO: Implement and render Cart component */}
+        <Cart cartItems={cartItems} />
+      </main>
     </div>
   )
 }
