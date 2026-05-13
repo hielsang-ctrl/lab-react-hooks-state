@@ -1,1 +1,32 @@
+.darkMode {
+  min-height: 100vh;
+  --page-bg: #000000;
+  --panel-bg: #1f2937;
+  --panel-border: #374151;
+  --text-color: #f9fafb;
+  --muted-color: #cbd5e1;
+  --accent-color: #60a5fa;
+  --accent-hover: #3b82f6;
+}
 
+.darkMode a,
+.darkMode label,
+.darkMode p,
+.darkMode h1,
+.darkMode h2,
+.darkMode h3 {
+  color: inherit;
+}
+
+.toggleButton {
+  border: 1px solid var(--panel-border);
+  border-radius: 6px;
+  background-color: var(--panel-bg);
+  color: var(--text-color);
+  cursor: pointer;
+  padding: 0.5rem 0.75rem;
+}
+
+.toggleButton:hover {
+  border-color: var(--accent-color);
+}
